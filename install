@@ -7,7 +7,7 @@ spawn sudo apt install nodejs
 expect "Do you want to continue?"
 send -- "yes\r"
 
-expect eof
+sleep 2
 
 spawn sudo apt install npm
 expect "Do you want to continue?"
