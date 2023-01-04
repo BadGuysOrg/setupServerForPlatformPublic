@@ -11,7 +11,7 @@ expect {
 }
 
 sleep 3
-spawn curl -sL https://deb.nodesource.com/setup_16.x | sudo bash -
+spawn curl -sL https://deb.nodesource.com/setup_16.x | sudo bash
 expect {
     "Do you want to continue?" {send -- "yes\r"}
 }
