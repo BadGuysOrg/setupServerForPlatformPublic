@@ -9,9 +9,7 @@ set server_port [lindex $argv 0]
 
 
 sleep 1
-spawn tee -a /etc/ssh/sshd_config << EOF
-      TEXT HERE
-EOF
+spawn tee -a /etc/ssh/sshd_config << EOF TEXT HERE EOF
 sleep 1
 spawn sudo service sshd restart
 
