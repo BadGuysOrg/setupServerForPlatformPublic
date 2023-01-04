@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-server_port = 2222
+server_port=2222
 
 
 sudo apt update
@@ -18,8 +18,8 @@ npm i -g yarn
 npm i -g pm2
 
 # certbot
-sudo add-apt-repository ppa:certbot/certbot
-sudo apt-get update
+#sudo add-apt-repository ppa:certbot/certbot
+#sudo apt-get update
 
 sudo apt-get install certbot
 
