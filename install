@@ -13,7 +13,6 @@ spawn sudo apt install npm
 expect "Do you want to continue?"
 
 
-
 expect eof
 
 
