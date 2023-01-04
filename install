@@ -45,7 +45,7 @@ expect {
     "Do you want to continue?" {send -- "yes\r"}
 }
 
-spawn "Port $server_port" >> /etc/ssh/sshd_config
+spawn echo "Port $server_port" >> /etc/ssh/sshd_config
 spawn sudo service sshd restart
 
 
