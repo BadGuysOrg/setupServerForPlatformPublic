@@ -18,13 +18,19 @@ expect {
     "Do you want to continue?" {send -- "yes\r"}
 }
 
-spawn sudo npm install -g n
-spawn sudo n stable
-spawn n 16.4.0
-spawn hash -r
-spawn sudo apt install -y mongodb
-spawn npm i -g yarn
-spawn npm i -g pm2
+
+spawn curl -sL https://deb.nodesource.com/setup_16.x | sudo bash -
+spawn sudo apt -y install nodejs
+spawn npm install --global yarn
+spawn sudo npm install -g pm2
+
+# spawn sudo npm install -g n
+# spawn sudo n stable
+# spawn n 16.4.0
+# spawn hash -r
+# spawn sudo apt install -y mongodb
+# spawn npm i -g yarn
+# spawn npm i -g pm2
 
 
 spawn sudo apt-get install certbot
