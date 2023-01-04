@@ -33,6 +33,11 @@ expect {
 }
 sleep 5
 
+spawn sudo apt install git-all
+expect {
+    "Do you want to continue?" {send -- "yes\r"}
+}
+
 
 
 expect eof
