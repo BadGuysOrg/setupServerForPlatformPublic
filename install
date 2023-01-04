@@ -10,8 +10,9 @@ expect {
 
 
 spawn sudo apt install npm
-expect "Do you want to continue?"
-send -- "yes\r"
+expect {
+    "Do you want to continue?" {send -- "yes\r"}
+}
 
 
 
