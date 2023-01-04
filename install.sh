@@ -1,8 +1,38 @@
 #!/bin/bash
 
 
-server_port=2222
 
+
+
+# spawn sudo npm install -g n
+# spawn sudo n stable
+# spawn n 16.4.0
+# spawn hash -r
+# spawn sudo apt install -y mongodb
+# spawn npm i -g yarn
+# spawn npm i -g pm2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+server_port=2222
 
 sudo apt update
 
