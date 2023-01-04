@@ -1,7 +1,7 @@
 
-# curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
 
-curl -o- https://raw.githubusercontent.com/BadGuysOrg/setupServerForPlatformPublic/master/old.sh | bash
+sudo apt-get update
+sudo apt-get install expect
+sudo apt-get install curl
 
-new.sh
-old.sh
+curl -o- https://raw.githubusercontent.com/BadGuysOrg/setupServerForPlatformPublic/master/install | expect
