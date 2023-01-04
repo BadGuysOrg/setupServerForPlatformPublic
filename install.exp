@@ -32,23 +32,6 @@ expect {
     "Do you want to continue?" {send -- "yes\r"}
 }
 
-spawn sudo apt install git-all
-expect {
-    "Do you want to continue?" {send -- "yes\r"}
-}
-
-spawn sudo apt install mc
-expect {
-    "Do you want to continue?" {send -- "yes\r"}
-}
-
-spawn sudo apt install nginx
-expect {
-    "Do you want to continue?" {send -- "yes\r"}
-}
-
-spawn echo "Port $server_port" >> /etc/ssh/sshd_config
-spawn sudo service sshd restart
 
 
 
