@@ -20,7 +20,7 @@ expect {
 spawn sudo npm install -g n
 spawn sudo n stable
 spawn n 16.4.0
-spawn hash -r
+# spawn hash -r
 spawn sudo apt install -y mongodb
 spawn npm i -g yarn
 spawn npm i -g pm2
