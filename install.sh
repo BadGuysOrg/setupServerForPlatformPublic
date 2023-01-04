@@ -16,7 +16,29 @@
 
 
 
+sleep 5
+spawn sudo apt-get install certbot
+expect {
+    "Do you want to continue?" {send -- "yes\r"}
+}
 
+sleep 5
+spawn sudo apt install git-all
+expect {
+    "Do you want to continue?" {send -- "yes\r"}
+}
+
+sleep 5
+spawn sudo apt install mc
+expect {
+    "Do you want to continue?" {send -- "yes\r"}
+}
+
+sleep 5
+spawn sudo apt install nginx
+expect {
+    "Do you want to continue?" {send -- "yes\r"}
+}
 
 
 
