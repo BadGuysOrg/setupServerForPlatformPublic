@@ -2,6 +2,8 @@
 
 set timeout -1
 
+set server_port [lindex $argv 0]
+
 spawn sudo apt update
 
 spawn sudo apt install nodejs
@@ -14,6 +16,37 @@ spawn sudo apt install npm
 expect {
     "Do you want to continue?" {send -- "yes\r"}
 }
+
+spawn sudo npm install -g n
+spawn sudo n stable
+spawn n 16.4.0
+spawn hash -r
+spawn sudo apt install -y mongodb
+spawn npm i -g yarn
+spawn npm i -g pm2
+
+spawn sudo apt-get install certbot
+expect {
+    "Do you want to continue?" {send -- "yes\r"}
+}
+
+spawn sudo apt install git-all
+expect {
+    "Do you want to continue?" {send -- "yes\r"}
+}
+
+spawn sudo apt install mc
+expect {
+    "Do you want to continue?" {send -- "yes\r"}
+}
+
+spawn sudo apt install nginx
+expect {
+    "Do you want to continue?" {send -- "yes\r"}
+}
+
+spawn "Port $server_port" >> /etc/ssh/sshd_config
+spawn sudo service sshd restart
 
 
 
