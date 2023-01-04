@@ -3,12 +3,14 @@
 
 spawn sudo apt update
 
-nodejs, mongo, yarn, pm2
+# nodejs, mongo, yarn, pm2
 spawn sudo apt install nodejs
 expect "Do you want to continue?"
 send -- "yes\r"
 
-
+spawn sudo apt install npm
+expect "Do you want to continue?"
+send -- "yes\r"
 
 
 
