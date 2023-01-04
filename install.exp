@@ -5,12 +5,12 @@ set server_port [lindex $argv 0]
 
 
 
-spawn sudo apt update
+sudo apt update
 
-spawn curl -sL https://deb.nodesource.com/setup_16.x | sudo bash -
-spawn sudo apt -y install nodejs
-spawn sudo npm install --global yarn
-spawn sudo npm install -g pm2
+curl -sL https://deb.nodesource.com/setup_16.x | sudo bash -
+sudo apt -y install nodejs
+sudo npm install --global yarn
+sudo npm install -g pm2
 
 spawn sudo apt-get install certbot
 expect {
