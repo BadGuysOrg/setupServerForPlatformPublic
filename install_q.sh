@@ -27,28 +27,25 @@
 #sudo systemctl start mongod.service
 
 
-echo 1111
-echo $1
+echo "Port $1" >> /etc/ssh/sshd_config
+sudo service sshd restart
 
-#echo "Port $1" >> /etc/ssh/sshd_config
-#sudo service sshd restart
-#
-#sudo ufw default deny incoming
-#sudo ufw default allow outgoing
-#sudo ufw allow http
-#sudo ufw allow https
-#sudo ufw allow $i
-#expect -c '
-#  set timeout -1
-#
-#  sleep 2
-#  spawn sudo ufw enable
-#  expect {
-#      "Command may disrupt existing ssh connections. Proceed with operation" {send -- "y\r"}
-#  }
-#
-#  expect eof
-#'
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow http
+sudo ufw allow https
+sudo ufw allow $i
+expect -c '
+  set timeout -1
+
+  sleep 2
+  spawn sudo ufw enable
+  expect {
+      "Command may disrupt existing ssh connections. Proceed with operation" {send -- "y\r"}
+  }
+
+  expect eof
+'
 
 
 exit 0
