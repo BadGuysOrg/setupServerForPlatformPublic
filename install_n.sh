@@ -16,8 +16,7 @@ expect -c '
   set timeout -1
 
   sleep 2
-  spawn
-   sudo apt install nginx git git-lfs certbot mc nodejs npm mongodb-org mongodb-org=4.4.1 mongodb-org-server=4.4.1 mongodb-org-shell=4.4.1 mongodb-org-mongos=4.4.1 mongodb-org-tools=4.4.1
+  spawn sudo apt install nginx git git-lfs certbot mc nodejs npm mongodb-org mongodb-org=4.4.1 mongodb-org-server=4.4.1 mongodb-org-shell=4.4.1 mongodb-org-mongos=4.4.1 mongodb-org-tools=4.4.1
   expect {
       "Do you want to continue?" {send -- "yes\r"}
   }
