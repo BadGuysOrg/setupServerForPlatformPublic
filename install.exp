@@ -2,14 +2,12 @@
 
 set timeout -1
 set server_port [lindex $argv 0]
-exp_internal 1
 
 
 
 
 sleep 1
-spawn echo "Port $server_port" >> /etc/ssh/sshd_config
-spawn mv /etc/ssh/sshd_config /etc/ssh/sshd_confi
+spawn sudo echo "Port $server_port" >> /etc/ssh/sshd_config
 
 
 expect eof
