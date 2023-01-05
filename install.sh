@@ -80,6 +80,14 @@ expect {
 }
 
 
+sleep 1
+spawn echo "Port $server_port"  >> /etc/ssh/sshd_config
+sleep 1
+spawn sudo service sshd restart
+
+
+
+
 
 
 
