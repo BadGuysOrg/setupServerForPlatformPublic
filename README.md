@@ -1,10 +1,9 @@
 
 
 sudo apt-get update && sudo apt-get install expect curl gnupg
-curl https://raw.githubusercontent.com/BadGuysOrg/setupServerForPlatformPublic/master/install_w.sh > install.sh
+curl https://raw.githubusercontent.com/BadGuysOrg/setupServerForPlatformPublic/master/install.sh > install.sh
+sudo bash install.sh 2222 '185.148.145.29;185.148.145.231;5.189.218.116;45.155.120.36;45.155.121.207;45.155.121.98;91.92.108.14;74.119.195.109'
 
-sudo sh install.sh port 'ip1;ip2'
-sudo sh install.sh 2222 '185.148.145.29;185.148.145.231;5.189.218.116;45.155.120.36;45.155.121.207;45.155.121.98;91.92.108.14;74.119.195.109'
 
 
 # dev
