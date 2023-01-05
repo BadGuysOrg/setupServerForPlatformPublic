@@ -49,3 +49,6 @@ echo $1
 #
 #  expect eof
 #'
+
+
+exit 0
