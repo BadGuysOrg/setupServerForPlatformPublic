@@ -26,6 +26,8 @@
 #
 #sudo systemctl start mongod.service
 
+
+echo 1111
 echo $1
 
 #echo "Port $1" >> /etc/ssh/sshd_config
