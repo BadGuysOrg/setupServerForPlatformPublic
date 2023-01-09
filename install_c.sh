@@ -2,6 +2,7 @@
 
 
 
+
 # mongo rep
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 656408E390CFB1F5
 echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb.list
@@ -80,10 +81,11 @@ then
   # end
   if [ ! -z $4 ]
   then
-      IFS=';' read -ra ADDR <<< "$4"
-      for country in "${ADDR[@]}"; do
-        iptables -I INPUT ! -i lo -p tcp --dport 22 -m geoip ! --src-cc $country -j DROP
-      done
+      iptables -I INPUT ! -i lo -p tcp --dport $1 -m geoip ! --src-cc $4 -j DROP
+#      IFS=';' read -ra ADDR <<< "$4"
+#      for country in "${ADDR[@]}"; do
+#        iptables -I INPUT ! -i lo -p tcp --dport $1 -m geoip ! --src-cc $country -j DROP
+#      done
   fi
 fi
 
