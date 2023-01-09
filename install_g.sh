@@ -36,12 +36,12 @@ sudo service sshd restart
 # start ufw
 if [ ! -z $2 ] || [ ! -z $3 ] [ ! -z $4 ] || [ ! -z $5 ]
 then
-  sudo ufw default deny incoming
   sudo ufw default allow outgoing
   sudo ufw allow http
   sudo ufw allow https
 fi
 
+# дозволяємо
 if [ ! -z $2 ]
 then
     IFS=';' read -ra ADDR <<< "$2"
@@ -49,6 +49,7 @@ then
       sudo ufw allow from $server_ip to any port $1
     done
 fi
+# забороняємо
 if [ ! -z $3 ]
 then
   IFS=';' read -ra ADDR <<< "$3"
@@ -58,16 +59,6 @@ then
 fi
 # end
 
-expect -c '
-  set timeout -1
-  sleep 2
-  spawn sudo ufw enable
-  expect {
-    "Command may disrupt existing ssh connections. Proceed with operation" {send -- "y\r"}
-  }
-  expect eof
-'
-ufw reload
 
 if [ ! -z $4 ] || [ ! -z $5 ]
 then
@@ -79,6 +70,17 @@ then
   /usr/lib/xtables-addons/xt_geoip_dl
   /usr/lib/xtables-addons/xt_geoip_build -D /usr/share/xt_geoip *.csv
   # end
+  # дозволяємо
+  if [ ! -z $5 ]
+  then
+      iptables -I INPUT ! -i lo -p tcp --dport $1 -m geoip ! --src-cc $4 -j DROP
+#      IFS=';' read -ra ADDR <<< "$4"
+#      for country in "${ADDR[@]}"; do
+#        iptables -I INPUT ! -i lo -p tcp --dport $1 -m geoip ! --src-cc $country -j DROP
+#      done
+  fi
+
+  # забороняємо
   if [ ! -z $4 ]
   then
       iptables -I INPUT ! -i lo -p tcp --dport $1 -m geoip ! --src-cc $4 -j DROP
@@ -88,6 +90,22 @@ then
 #      done
   fi
 fi
+
+if [ ! -z $3 ] || [ ! -z $5 ]
+
+sudo ufw default deny incoming
+
+
+expect -c '
+  set timeout -1
+  sleep 2
+  spawn sudo ufw enable
+  expect {
+    "Command may disrupt existing ssh connections. Proceed with operation" {send -- "y\r"}
+  }
+  expect eof
+'
+ufw reload
 
 
 exit 0
