@@ -35,7 +35,7 @@ sudo service sshd restart
 # end
 
 # start ufw
-if [ ! -z $2 ] || [ ! -z $3 ] [ ! -z $4 ] || [ ! -z $5 ]
+if [ ! -z $2 ] || [ ! -z $3 ] || [ ! -z $4 ] || [ ! -z $5 ]
 then
   sudo ufw default allow outgoing
   sudo ufw allow http
