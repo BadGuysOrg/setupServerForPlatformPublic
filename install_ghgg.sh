@@ -90,7 +90,7 @@ then
 fi
 
 
-if [ ! -z $2 ] || [ ! -z $4 ]
+if [ ! -z $3 ] || [ ! -z $5 ]
 then
   sudo ufw allow $1
 fi
