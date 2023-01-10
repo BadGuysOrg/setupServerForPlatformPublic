@@ -72,30 +72,32 @@ then
   /usr/lib/xtables-addons/xt_geoip_dl
   /usr/lib/xtables-addons/xt_geoip_build -D /usr/share/xt_geoip *.csv
   # end
-  # дозволяємо geo
-  if [ ! -z $5 ]
-  then
-      iptables -I INPUT ! -i lo -p tcp --dport $1 -m geoip ! --src-cc $4 -j DROP
-#      IFS=';' read -ra ADDR <<< "$4"
-#      for country in "${ADDR[@]}"; do
-#        iptables -I INPUT ! -i lo -p tcp --dport $1 -m geoip ! --src-cc $country -j DROP
-#      done
-  fi
 
-  # забороняємо geo
+  # дозволяємо geo
   if [ ! -z $4 ]
   then
-      iptables -I INPUT ! -i lo -p tcp --dport $1 -m geoip ! --src-cc $4 -j DROP
+#      iptables -I INPUT ! -i lo -p tcp --dport $1 -m geoip ! --src-cc $4 -j DROP
 #      IFS=';' read -ra ADDR <<< "$4"
 #      for country in "${ADDR[@]}"; do
 #        iptables -I INPUT ! -i lo -p tcp --dport $1 -m geoip ! --src-cc $country -j DROP
 #      done
   fi
+
+    # забороняємо geo
+    if [ ! -z $5 ]
+    then
+        iptables -I INPUT ! -i lo -p tcp --dport $1 -m geoip ! --src-cc $4 -j DROP
+  #      IFS=';' read -ra ADDR <<< "$4"
+  #      for country in "${ADDR[@]}"; do
+  #        iptables -I INPUT ! -i lo -p tcp --dport $1 -m geoip ! --src-cc $country -j DROP
+  #      done
+    fi
+
 fi
 
-if [ ! -z $2 ] || [ ! -z $5 ]
+if [ ! -z $2 ] || [ ! -z $4 ]
 then
-  sudo ufw default deny incoming
+#  sudo ufw default deny incoming
 fi
 
 expect -c '
