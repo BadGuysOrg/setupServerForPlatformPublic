@@ -39,6 +39,7 @@ then
   sudo ufw default allow outgoing
   sudo ufw allow http
   sudo ufw allow https
+  sudo ufw allow $1
 fi
 # end
 
