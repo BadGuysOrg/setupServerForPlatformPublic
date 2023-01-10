@@ -76,7 +76,7 @@ then
   # дозволяємо geo
   if [ ! -z $4 ]
   then
-    iptables -I INPUT ! -i lo -p tcp --dport $1 -m geoip ! --src-cc $5 -j DROP
+    iptables -I INPUT ! -i lo -p tcp --dport $1 -m geoip ! --src-cc $4 -j DROP
 #    iptables -I INPUT -i lo -p tcp --dport $1 -m geoip --src-cc $4 -j ACCEPT
 #      IFS=';' read -ra ADDR <<< "$4"
 #      for country in "${ADDR[@]}"; do
