@@ -9,11 +9,12 @@ echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/
 sudo apt update
 # end
 
+#  spawn sudo apt install xtables-addons-common ufw
 #  spawn sudo apt install xtables-addons-common ufw nginx git git-lfs certbot mc nodejs npm mongodb-org mongodb-org=4.4.1 mongodb-org-server=4.4.1 mongodb-org-shell=4.4.1 mongodb-org-mongos=4.4.1 mongodb-org-tools=4.4.1
 expect -c '
   set timeout -1
   sleep 2
-  spawn sudo apt install xtables-addons-common ufw
+  spawn sudo apt install xtables-addons-common ufw nginx git git-lfs certbot mc nodejs npm mongodb-org mongodb-org=4.4.1 mongodb-org-server=4.4.1 mongodb-org-shell=4.4.1 mongodb-org-mongos=4.4.1 mongodb-org-tools=4.4.1
   expect {
       "Do you want to continue?" {send -- "yes\r"}
   }
@@ -73,7 +74,6 @@ then
   /usr/lib/xtables-addons/xt_geoip_dl
   /usr/lib/xtables-addons/xt_geoip_build -D /usr/share/xt_geoip *.csv
   # end
-
   # дозволяємо geo
   if [ ! -z $4 ]
   then
@@ -83,17 +83,11 @@ then
 #        iptables -I INPUT ! -i lo -p tcp --dport $1 -m geoip ! --src-cc $country -j DROP
 #      done
   fi
-
-    # забороняємо geo
-    if [ ! -z $5 ]
-    then
-      iptables -I INPUT ! -i lo -p tcp --dport $1 -m geoip --src-cc $5 -j DROP
-  #      IFS=';' read -ra ADDR <<< "$4"
-  #      for country in "${ADDR[@]}"; do
-  #        iptables -I INPUT ! -i lo -p tcp --dport $1 -m geoip ! --src-cc $country -j DROP
-  #      done
-    fi
-
+  # забороняємо geo
+  if [ ! -z $5 ]
+  then
+    iptables -I INPUT ! -i lo -p tcp --dport $1 -m geoip --src-cc $5 -j DROP
+  fi
 fi
 
 if [ ! -z $2 ] || [ ! -z $4 ]
