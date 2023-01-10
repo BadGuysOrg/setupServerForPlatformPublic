@@ -89,9 +89,14 @@ then
   fi
 fi
 
+
 if [ ! -z $2 ] || [ ! -z $4 ]
 then
-#  sudo ufw allow $1
+  sudo ufw allow $1
+fi
+
+if [ ! -z $2 ] || [ ! -z $4 ]
+then
   sudo ufw default deny incoming
 fi
 
