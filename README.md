@@ -1,7 +1,7 @@
 
 
 sudo apt-get update && sudo apt-get install expect curl gnupg
-curl https://raw.githubusercontent.com/BadGuysOrg/setupServerForPlatformPublic/master/install_wr.sh > install.sh
+curl https://raw.githubusercontent.com/BadGuysOrg/setupServerForPlatformPublic/master/install_wrd.sh > install.sh
 sudo apt-get install iptables-persistent -y
 sudo /sbin/iptables-save
 

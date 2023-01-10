@@ -76,7 +76,8 @@ then
   # дозволяємо geo
   if [ ! -z $4 ]
   then
-    iptables -I INPUT ! -i lo -p tcp --dport $1 -m geoip ! --src-cc $4 -j DROP
+#    iptables -I INPUT ! -i lo -p tcp --dport 22 -m geoip ! --src-cc UA,RU -j DROP
+    iptables -I INPUT -p tcp --dport $1 -m geoip ! --src-cc $4 -j DROP
 #    iptables -I INPUT -i lo -p tcp --dport $1 -m geoip --src-cc $4 -j ACCEPT
 #      IFS=';' read -ra ADDR <<< "$4"
 #      for country in "${ADDR[@]}"; do
@@ -86,7 +87,7 @@ then
   # забороняємо geo
   if [ ! -z $5 ]
   then
-    iptables -I INPUT ! -i lo -p tcp --dport $1 -m geoip --src-cc $5 -j DROP
+    iptables -I INPUT -p tcp --dport $1 -m geoip --src-cc $5 -j DROP
   fi
 fi
 
@@ -98,7 +99,7 @@ fi
 
 if [ ! -z $2 ] || [ ! -z $4 ]
 then
-  sudo iptables -A INPUT -p tcp --dport $1 -j DROP
+#  sudo iptables -A INPUT -p tcp --dport $1 -j DROP
 fi
 
 
