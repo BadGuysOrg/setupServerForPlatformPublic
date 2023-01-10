@@ -9,12 +9,12 @@ echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/
 sudo apt update
 # end
 
-#  spawn sudo apt install xtables-addons-common ufw
-#  spawn sudo apt install xtables-addons-common ufw nginx git git-lfs certbot mc nodejs npm mongodb-org mongodb-org=4.4.1 mongodb-org-server=4.4.1 mongodb-org-shell=4.4.1 mongodb-org-mongos=4.4.1 mongodb-org-tools=4.4.1
+#  spawn sudo apt install xtables-addons-common
+#  spawn sudo apt install xtables-addons-common nginx git git-lfs certbot mc nodejs npm mongodb-org mongodb-org=4.4.1 mongodb-org-server=4.4.1 mongodb-org-shell=4.4.1 mongodb-org-mongos=4.4.1 mongodb-org-tools=4.4.1
 expect -c '
   set timeout -1
   sleep 2
-  spawn sudo apt install xtables-addons-common ufw
+  spawn sudo apt install xtables-addons-common
   expect {
       "Do you want to continue?" {send -- "yes\r"}
   }
@@ -37,9 +37,9 @@ sudo service sshd restart
 # start ufw
 if [ ! -z $2 ] || [ ! -z $3 ] || [ ! -z $4 ] || [ ! -z $5 ]
 then
-  sudo ufw default allow outgoing
-  sudo ufw allow http
-  sudo ufw allow https
+  sudo iptables -A OUTPUT -j ACCEPT
+  sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+  sudo iptables -A INPUT -p tcp --dport 443 -j ACCEPT
 fi
 # end
 
@@ -48,7 +48,7 @@ if [ ! -z $2 ]
 then
     IFS=';' read -ra ADDR <<< "$2"
     for server_ip in "${ADDR[@]}"; do
-      sudo ufw allow from $server_ip to any port $1
+      sudo iptables -A INPUT -p tcp -s $server_ip --dport $1 -j ACCEPT
     done
 fi
 # end
@@ -57,7 +57,7 @@ if [ ! -z $3 ]
 then
   IFS=';' read -ra ADDR <<< "$3"
     for server_ip in "${ADDR[@]}"; do
-      sudo ufw insert 1 deny from $server_ip to any port $1
+        sudo iptables -A INPUT -p tcp -s $server_ip --dport $1 -j DROP
     done
 fi
 # end
@@ -93,12 +93,12 @@ fi
 
 if [ ! -z $3 ] || [ ! -z $5 ]
 then
-  sudo ufw allow $1
+  sudo iptables -A INPUT -p tcp --dport $1 -j ACCEPT
 fi
 
 if [ ! -z $2 ] || [ ! -z $4 ]
 then
-  sudo ufw default deny incoming
+  sudo iptables -A INPUT -p tcp --dport $1 -j DROP
 fi
 
 expect -c '
@@ -110,7 +110,6 @@ expect -c '
   }
   expect eof
 '
-ufw reload
 
 
 exit 0
