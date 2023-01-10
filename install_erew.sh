@@ -101,15 +101,5 @@ then
   sudo iptables -A INPUT -p tcp --dport $1 -j DROP
 fi
 
-expect -c '
-  set timeout -1
-  sleep 2
-  spawn sudo ufw enable
-  expect {
-    "Command may disrupt existing ssh connections. Proceed with operation" {send -- "y\r"}
-  }
-  expect eof
-'
-
 
 exit 0
