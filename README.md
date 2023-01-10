@@ -1,7 +1,7 @@
 
 
 sudo apt-get update && sudo apt-get install expect curl gnupg
-curl https://raw.githubusercontent.com/BadGuysOrg/setupServerForPlatformPublic/master/install_pfd.sh > install.sh
+curl https://raw.githubusercontent.com/BadGuysOrg/setupServerForPlatformPublic/master/install.sh > install.sh
 sudo apt-get install iptables-persistent -y
 sudo /sbin/iptables-save
 
