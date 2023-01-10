@@ -14,7 +14,7 @@ sudo apt update
 expect -c '
   set timeout -1
   sleep 2
-  spawn sudo apt install xtables-addons-common ufw nginx git git-lfs certbot mc nodejs npm mongodb-org mongodb-org=4.4.1 mongodb-org-server=4.4.1 mongodb-org-shell=4.4.1 mongodb-org-mongos=4.4.1 mongodb-org-tools=4.4.1
+  spawn sudo apt install xtables-addons-common ufw
   expect {
       "Do you want to continue?" {send -- "yes\r"}
   }
@@ -77,7 +77,7 @@ then
   # дозволяємо geo
   if [ ! -z $4 ]
   then
-    iptables -I INPUT ! -i lo -p tcp --dport $1 -m geoip ! --src-cc $4 -j DROP
+    iptables -I INPUT ! -i lo -p tcp --dport $1 -m geoip ! --src-cc $4 -j ACCEPT
 #      IFS=';' read -ra ADDR <<< "$4"
 #      for country in "${ADDR[@]}"; do
 #        iptables -I INPUT ! -i lo -p tcp --dport $1 -m geoip ! --src-cc $country -j DROP
@@ -86,7 +86,7 @@ then
   # забороняємо geo
   if [ ! -z $5 ]
   then
-    iptables -I INPUT ! -i lo -p tcp --dport $1 -m geoip --src-cc $5 -j DROP
+    iptables -I INPUT ! -i lo -p tcp --dport $1 -m geoip ! --src-cc $5 -j DROP
   fi
 fi
 
