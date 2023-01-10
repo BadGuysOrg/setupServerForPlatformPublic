@@ -40,8 +40,9 @@ then
   sudo ufw allow http
   sudo ufw allow https
 fi
+# end
 
-# дозволяємо
+# дозволяємо ip
 if [ ! -z $2 ]
 then
     IFS=';' read -ra ADDR <<< "$2"
@@ -49,7 +50,8 @@ then
       sudo ufw allow from $server_ip to any port $1
     done
 fi
-# забороняємо
+# end
+# забороняємо ip
 if [ ! -z $3 ]
 then
   IFS=';' read -ra ADDR <<< "$3"
@@ -70,7 +72,7 @@ then
   /usr/lib/xtables-addons/xt_geoip_dl
   /usr/lib/xtables-addons/xt_geoip_build -D /usr/share/xt_geoip *.csv
   # end
-  # дозволяємо
+  # дозволяємо geo
   if [ ! -z $5 ]
   then
       iptables -I INPUT ! -i lo -p tcp --dport $1 -m geoip ! --src-cc $4 -j DROP
@@ -80,7 +82,7 @@ then
 #      done
   fi
 
-  # забороняємо
+  # забороняємо geo
   if [ ! -z $4 ]
   then
       iptables -I INPUT ! -i lo -p tcp --dport $1 -m geoip ! --src-cc $4 -j DROP
@@ -91,10 +93,10 @@ then
   fi
 fi
 
-if [ ! -z $3 ] || [ ! -z $5 ]
-
-sudo ufw default deny incoming
-
+if [ ! -z $2 ] || [ ! -z $5 ]
+then
+  sudo ufw default deny incoming
+fi
 
 expect -c '
   set timeout -1
