@@ -40,7 +40,6 @@ then
   sudo ufw default allow outgoing
   sudo ufw allow http
   sudo ufw allow https
-  sudo ufw allow $1
 fi
 # end
 
@@ -77,7 +76,7 @@ then
   # дозволяємо geo
   if [ ! -z $4 ]
   then
-    iptables -I INPUT ! -i lo -p tcp --dport $1 -m geoip ! --src-cc $4 -j ACCEPT
+    iptables -I INPUT -i lo -p tcp --dport $1 -m geoip --src-cc $4 -j ACCEPT
 #      IFS=';' read -ra ADDR <<< "$4"
 #      for country in "${ADDR[@]}"; do
 #        iptables -I INPUT ! -i lo -p tcp --dport $1 -m geoip ! --src-cc $country -j DROP
@@ -92,6 +91,7 @@ fi
 
 if [ ! -z $2 ] || [ ! -z $4 ]
 then
+#  sudo ufw allow $1
   sudo ufw default deny incoming
 fi
 
